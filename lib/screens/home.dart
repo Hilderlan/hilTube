@@ -1,9 +1,15 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:hiltube/blocs/videos_bloc.dart';
 import 'package:hiltube/delegates/data_search.dart';
+import 'package:hiltube/widgets/videotile.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Novo jeito de pegar o bloc
+    final VideosBloc bloc = BlocProvider.getBloc<VideosBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -27,10 +33,30 @@ class Home extends StatelessWidget {
             icon: Icon(Icons.search),
             onPressed: () async {
               String result = await showSearch(context: context, delegate: DataSearch());
-              print(result);
+              
+              if(result != null){
+                bloc.inSearch.add(result);
+              }
             }
           ),
         ],
+      ),
+      backgroundColor: Colors.black87,
+      body: StreamBuilder(
+        stream: bloc.outVideos,
+        builder: (context, snapshot){
+          if(snapshot.hasData){
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index){
+                return VideoTile(snapshot.data[index]);
+              }
+            );
+          }
+          else{
+            return Container();
+          }
+        }
       ),
     );
   }
