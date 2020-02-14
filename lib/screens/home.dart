@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hiltube/blocs/favorite_bloc.dart';
 import 'package:hiltube/blocs/videos_bloc.dart';
 import 'package:hiltube/delegates/data_search.dart';
+import 'package:hiltube/screens/favorites.dart';
 import 'package:hiltube/widgets/videotile.dart';
 
 class Home extends StatelessWidget {
@@ -38,7 +39,7 @@ class Home extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.star),
             onPressed: (){
-
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites()));
             }
           ),
           IconButton(
