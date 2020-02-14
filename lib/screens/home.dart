@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:hiltube/blocs/favorite_bloc.dart';
 import 'package:hiltube/blocs/videos_bloc.dart';
 import 'package:hiltube/delegates/data_search.dart';
 import 'package:hiltube/widgets/videotile.dart';
@@ -9,6 +10,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     // Novo jeito de pegar o bloc
     final VideosBloc bloc = BlocProvider.getBloc<VideosBloc>();
+    final FavoriteBloc blocFavorites = BlocProvider.getBloc<FavoriteBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -21,7 +23,18 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           Align(
             alignment: Alignment.center,
-            child: Text("0"),
+            child: StreamBuilder(
+              stream: blocFavorites.outFavorites,
+              initialData: {},
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return Text("${snapshot.data.length}");
+                }
+                else{
+                  return Container();
+                }
+              }
+            ),
           ),
           IconButton(
             icon: Icon(Icons.star),
