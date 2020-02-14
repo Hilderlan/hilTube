@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:hiltube/models/video.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteBloc implements BlocBase{
@@ -18,7 +19,7 @@ class FavoriteBloc implements BlocBase{
 
   Map<String, Video> _favorites = {};
 
-  final StreamController<Map<String, Video>> _favoritesController = StreamController<Map<String, Video>>.broadcast();
+  final _favoritesController = BehaviorSubject<Map<String, Video>>.seeded({});
   Stream<Map<String, Video>> get outFavorites => _favoritesController.stream;
 
   void toggleFavorites(Video video){

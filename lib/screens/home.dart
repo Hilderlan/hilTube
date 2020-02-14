@@ -25,7 +25,6 @@ class Home extends StatelessWidget {
             alignment: Alignment.center,
             child: StreamBuilder(
               stream: blocFavorites.outFavorites,
-              initialData: {},
               builder: (context, snapshot){
                 if(snapshot.hasData){
                   return Text("${snapshot.data.length}");
