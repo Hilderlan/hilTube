@@ -16,8 +16,8 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          height: 80.0,
-          child: Image.asset("images/youtube_PNG22.png"),
+          height: 30.0,
+          child: Image.asset("images/hilTube-logo2.png"),
         ),
         elevation: 0,
         backgroundColor: Colors.black87,
