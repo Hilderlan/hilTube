@@ -22,34 +22,44 @@ class Favorites extends StatelessWidget {
         stream: bloc.outFavorites,
         initialData: {},
         builder: (context, snapshot){
-          return ListView(
-            children: snapshot.data.values.map((video){
-              return InkWell(
-                onTap: (){
-                  FlutterYoutube.playYoutubeVideoById(apiKey: API_KEY, videoId: video.id);
-                },
-                onLongPress: (){
-                  bloc.toggleFavorites(video);
-                },
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 50,
-                      child: Image.network(video.thumb),
-                    ),
-                    Expanded(
-                      child: Text(
-                        video.title,
-                        style: TextStyle(color: Colors.white70),
-                        maxLines: 2,
+          if(snapshot.data.length > 0){
+            return ListView(
+              children: snapshot.data.values.map((video){
+                return InkWell(
+                  onTap: (){
+                    FlutterYoutube.playYoutubeVideoById(apiKey: API_KEY, videoId: video.id);
+                  },
+                  onLongPress: (){
+                    bloc.toggleFavorites(video);
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: 100,
+                        height: 50,
+                        child: Image.network(video.thumb),
                       ),
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          );
+                      Expanded(
+                        child: Text(
+                          video.title,
+                          style: TextStyle(color: Colors.white70),
+                          maxLines: 2,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            );
+          }
+          else{
+            return Center(
+              child: Text(
+                "Your favorite videos will be shown here!",
+                style: TextStyle(color: Colors.white),
+              ),
+            );
+          }
         }
       ),
     );
