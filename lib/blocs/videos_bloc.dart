@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:hiltube/api.dart';
 import 'package:hiltube/models/video.dart';
+import 'package:random_words/random_words.dart';
 
 class VideosBloc implements BlocBase{
   Api api;
@@ -19,6 +20,8 @@ class VideosBloc implements BlocBase{
   VideosBloc(){
     api = Api();
 
+    String randomWord = generateNoun().take(1).toString();
+    _searchController.sink.add(randomWord);
     _searchController.stream.listen(_search);
   }
 

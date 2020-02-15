@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
     // Novo jeito de pegar o bloc
     final VideosBloc bloc = BlocProvider.getBloc<VideosBloc>();
     final FavoriteBloc blocFavorites = BlocProvider.getBloc<FavoriteBloc>();
-
+  
     return Scaffold(
       appBar: AppBar(
         title: Container(

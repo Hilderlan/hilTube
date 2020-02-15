@@ -35,7 +35,6 @@ class Api{
         }
       ).toList();
 
-      print(videos);
       return videos;
     }
     else{

@@ -29,6 +29,7 @@ dependencies:
   shared_preferences: ^0.5.6+1
   rxdart: ^0.23.1
   bloc_pattern: ^2.5.1
+  random_words: ^1.0.2
 
 dev_dependencies:
   flutter_test:

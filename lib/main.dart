@@ -6,9 +6,6 @@ import 'package:hiltube/blocs/videos_bloc.dart';
 import 'package:hiltube/screens/home.dart';
 
 void main(){
-  Api api = Api();
-  api.search("flutter");
-
   runApp(MyApp()); 
 }
 
